@@ -865,15 +865,24 @@ fun p46() { //a && (a || !b)
 
 fun p49(bits: Int) {
     print("P49: ")
+
+	if (n <= 0) {
+        return
+    }
     
     var gc = mutableListOf<String>()
-   	gc.add("0")
+    
+    gc.add("0")
     gc.add("1")
     
     var i = 2
     
-    while (i < 1 shl bits) {
-     	for (j in i - 1 downTo 0) {
+    while (true) {
+        if (i >= 1.shl(bits)) {
+            break
+        }
+        
+        for (j in i - 1 downTo 0) {
             gc.add(gc[j])
         }
         
@@ -881,16 +890,14 @@ fun p49(bits: Int) {
             gc.set(j, "0" + gc[j])
         }
         
-        for (j in i..2.toDouble().pow(i.toDouble()).toInt() - 1) {
+        for (j in i..(2 * i) - 1) {
             gc.set(j, "1" + gc[j])
         }
-    	
-        i = i shl 1
+        
+        i = i.shl(1)
     }
     
-    for (x in gc) {
-        println(x)
-    }
+    println(gc)
 }
 
 fun main() {
