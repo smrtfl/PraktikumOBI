@@ -457,21 +457,21 @@ fun p27a1(names: MutableList<String>, n: Int, combination: MutableList<String>, 
 }
 
 fun p27a2(groups: List<MutableList<List<String>>>) {
-    for (four in groups[0]) {
+    for (g1 in groups[0]) {
         var comb = mutableListOf<List<String>>()
     	var notInComb = true
         
-        comb.add(four)
+        comb.add(g1)
         
-        loop3@ for (three in groups[1]) {
+        outerLoop@ for (g2 in groups[1]) {
             while(comb.size != 1) {
                 comb.removeLast()
             }
             
-            for (x in three) {
-                if (x in four) {
+            for (x in g2) {
+                if (x in g1) {
                     notInComb = false
-                    continue@loop3
+                    continue@outerLoop
                 }
                 else {
                     notInComb = true
@@ -479,25 +479,25 @@ fun p27a2(groups: List<MutableList<List<String>>>) {
             }
             
             if (notInComb) {
-               comb.add(three)
+               comb.add(g2)
             }
             
-            loop2@ for (two in groups[2]) {
+            innerLoop@ for (g3 in groups[2]) {
                 while(comb.size != 2) {
                     comb.removeLast()
                 }
                 
-                for (x in two) {
-                    if (x in four || x in three) {
+                for (x in g3) {
+                    if (x in g1 || x in g2) {
                         notInComb = false
-                        continue@loop2
+                        continue@innerLoop
                     }
                     else {
                         notInComb = true
                     }
                 }
                 if (notInComb) {
-                    comb.add(two)
+                    comb.add(g3)
                     println(comb)
                 }
             }
