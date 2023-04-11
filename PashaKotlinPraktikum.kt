@@ -1,4 +1,5 @@
 import kotlin.math.abs
+import kotlin.math.pow
 import kotlin.random.Random
 
 fun Boolean.toInt(): Int {
@@ -865,7 +866,7 @@ fun p46() { //a && (a || !b)
 fun p49(bits: Int) {
     print("P49: ")
 
-	if (n <= 0) {
+	if (bits <= 0) {
         return
     }
     
@@ -969,7 +970,6 @@ fun main() {
     p28("abc".toList(), "de".toList(), "fgh".toList(), "de".toList(), "ijkl".toList(), "mn".toList(), "o".toList())
     
     //ARITHMETICS
-    
     p31(7)
     p32(36, 63)
     p33(35, 64)
