@@ -446,6 +446,74 @@ fun p26(str: String, n: Int, combination: String, combs: MutableList<List<Char>>
         p26(str.slice(i + 1..str.length - 1), n - 1, combination + str[i].toString(), combs)
     }
 }
+
+fun p27a1(names: MutableList<String>, n: Int, combination: MutableList<String>, group: MutableList<List<String>>) {
+    if (n == 0) {
+        group.add(combination)
+    }
+    for (i in 0..names.size - 1) {
+        p27a1(names.slice(i + 1..names.size - 1).toMutableList(), n - 1, (combination + names[i]).toMutableList(), group)
+    }
+}
+
+fun p27a2(groups: List<MutableList<List<String>>>) {
+    for (four in groups[0]) {
+        var comb = mutableListOf<List<String>>()
+    	var notInComb = true
+        
+        comb.add(four)
+        
+        loop3@ for (three in groups[1]) {
+            while(comb.size != 1) {
+                comb.removeLast()
+            }
+            
+            for (x in three) {
+                if (x in four) {
+                    notInComb = false
+                    continue@loop3
+                }
+                else {
+                    notInComb = true
+                }
+            }
+            
+            if (notInComb) {
+               comb.add(three)
+            }
+            
+            loop2@ for (two in groups[2]) {
+                while(comb.size != 2) {
+                    comb.removeLast()
+                }
+                
+                for (x in two) {
+                    if (x in four || x in three) {
+                        notInComb = false
+                        continue@loop2
+                    }
+                    else {
+                        notInComb = true
+                    }
+                }
+                if (notInComb) {
+                    comb.add(two)
+                    println(comb)
+                }
+            }
+        }
+    }
+}
+
+fun p27b(names: MutableList<String>, freqs: List<Int>) {
+    var groups = listOf(mutableListOf<List<String>>(), mutableListOf<List<String>>(), mutableListOf<List<String>>())
+    
+    for (i in 0..freqs.size - 1) {
+        p27a1(names, freqs[i], mutableListOf<String>(), groups[i])
+    }
+    
+    p27a2(groups)
+}
  
 fun p28(a: List<Char>, b: List<Char>, c: List<Char>, d: List<Char>, e: List<Char>, f: List<Char>, g: List<Char>) {
     print("P28: ")
@@ -798,7 +866,7 @@ fun p46() { //a && (a || !b)
 fun p49(bits: Int) {
     print("P49: ")
     
-    /*var gc = mutableListOf<String>()
+    var gc = mutableListOf<String>()
    	gc.add("0")
     gc.add("1")
     
@@ -822,7 +890,7 @@ fun p49(bits: Int) {
     
     for (x in gc) {
         println(x)
-    }*/
+    }
 }
 
 fun main() {
@@ -878,7 +946,19 @@ fun main() {
     p26(str6, 3, "", combs)
     println("P26: " + combs)
     
-    println("P27: None")
+    var names = mutableListOf("Aldo", "Beat", "Carla", "David", "Evi", "Flip", "Gary", "Hugo", "Ida")
+    /*var group4 = mutableListOf<List<String>>()
+    var group3 = mutableListOf<List<String>>()
+    var group2 = mutableListOf<List<String>>()
+    p27a1(names, 4, mutableListOf<String>(), group4)
+    p27a1(names, 3, mutableListOf<String>(), group3)
+    p27a1(names, 2, mutableListOf<String>(), group2)
+    println("P27 A: ")
+    p27a2(listOf(group4, group3, group2))*/
+    
+    println("P27 B: ")
+    
+    p27b(names, listOf(2, 2, 5))
     
     p28("abc".toList(), "de".toList(), "fgh".toList(), "de".toList(), "ijkl".toList(), "mn".toList(), "o".toList())
     
