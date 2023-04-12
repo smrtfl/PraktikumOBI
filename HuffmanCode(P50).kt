@@ -45,9 +45,7 @@ class Huffman {
                 right = null
             )
             
-            if (huffmanNode != null) {
-                priorityQueue.add(huffmanNode)
-            }            
+            priorityQueue.add(huffmanNode)          
         }
         
         var root: Node = Node(
