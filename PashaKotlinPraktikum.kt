@@ -866,7 +866,7 @@ fun p46() { //a && (a || !b)
 fun p49(bits: Int) {
     print("P49: ")
 
-	if (n <= 0) {
+	if (bits <= 0) {
         return
     }
     
@@ -954,23 +954,22 @@ fun main() {
     println("P26: " + combs)
     
     var names = mutableListOf("Aldo", "Beat", "Carla", "David", "Evi", "Flip", "Gary", "Hugo", "Ida")
-    /*var group4 = mutableListOf<List<String>>()
+    var group4 = mutableListOf<List<String>>()
     var group3 = mutableListOf<List<String>>()
     var group2 = mutableListOf<List<String>>()
     p27a1(names, 4, mutableListOf<String>(), group4)
     p27a1(names, 3, mutableListOf<String>(), group3)
     p27a1(names, 2, mutableListOf<String>(), group2)
-    println("P27 A: ")
-    p27a2(listOf(group4, group3, group2))*/
+    println("P27 A: ") //11.04.23
+    p27a2(listOf(group4, group3, group2))
     
-    println("P27 B: ")
+    println("P27 B: ") //11.04.23
     
     p27b(names, listOf(2, 2, 5))
     
     p28("abc".toList(), "de".toList(), "fgh".toList(), "de".toList(), "ijkl".toList(), "mn".toList(), "o".toList())
     
     //ARITHMETICS
-    
     p31(7)
     p32(36, 63)
     p33(35, 64)
@@ -989,5 +988,7 @@ fun main() {
     //P46
     p46()
     println("P48: ${true.xor_(listOf(true, false, true))}")
+    
+    //11.04.23
     p49(3)
 }
